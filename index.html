@@ -95,107 +95,79 @@
         transform: translateY(100vh);
       }
     }
-
-    .birthday-banner {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 40px;
-      color: #ffccff;
-      font-weight: bold;
-      writing-mode: vertical-rl;
-      text-align: center;
-      z-index: 9999;
-      animation: fadeInBanner 1s ease-in-out;
-    }
-
-    .left-banner { left: 10px; }
-    .right-banner { right: 10px; }
-
-    @keyframes fadeInBanner {
-      from { opacity: 0; transform: translateY(-50%) scale(0.8); }
-      to { opacity: 1; transform: translateY(-50%) scale(1); }
-    }
   </style>
 </head>
+
 <body>
 
-  <!-- 音乐播放 -->
-  <audio id="bgm" loop>
-    <source src="your_music.mp3" type="audio/mpeg">
-    您的浏览器不支持音频播放。
-  </audio>
+<!-- 音乐播放 -->
+<audio id="bgm" loop>
+  <source src="your_music.mp3" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
 
-  <!-- 手动播放按钮隐藏 -->
-  <button onclick="document.getElementById('bgm').play()" hidden>🎵 点我播放背景音乐</button>
+<!-- 隐藏按钮，不需要 -->
+<button onclick="document.getElementById('bgm').play()" hidden>🎵 点我播放背景音乐</button>
 
-  <div class="container">
-    <h1><0429>生日快乐!楚宁喵!!🎂</h1>
-    <p>今天是你来到世界的第20年。</p>
-    <p>希望你每一天都没有烦恼，</p>
-    <p>钱从四面八方来！！好运连连~</p>
-    <p>我会一直更新这个界面的~</p>
-    <p>祝你在新的一岁和元彬喵多多见面！！爱你！✨</p>
-
-    <div class="footer">
-      From 思含喵~ 🪄
-    </div>
+<!-- 生日祝福 -->
+<div class="container">
+  <h1>0429 生日快乐! 楚宁喵!! 🎂</h1>
+  <p>今天是你来到世界的第20年。</p>
+  <p>希望你每一天都没有烦恼，</p>
+  <p>钱从四面八方来！！好运连连~</p>
+  <p>我会一直更新这个界面的~</p>
+  <p>祝你在新的一岁和元彬喵多多见面！！爱你！✨</p>
+  <div class="footer">
+    From 思含喵~ 🪄
   </div>
+</div>
 
-  <div class="image-gallery">
-    <img src="photo1.jpg" style="--delay: 0s;">
-    <img src="photo2.jpg" style="--delay: 0.5s;">
-    <img src="photo3.jpg" style="--delay: 1s;">
-    <img src="photo4.jpg" style="--delay: 1.5s;">
-  </div>
+<!-- 照片 -->
+<div class="image-gallery">
+  <img src="photo1.jpg" style="--delay: 0s;">
+  <img src="photo2.jpg" style="--delay: 0.5s;">
+  <img src="photo3.jpg" style="--delay: 1s;">
+  <img src="photo4.jpg" style="--delay: 1.5s;">
+</div>
 
-  <script>
-    // 魔法星星生成
-    for (let i = 0; i < 100; i++) {
-      let star = document.createElement("div");
-      star.className = "star";
-      star.style.left = Math.random() * 100 + "vw";
-      star.style.animationDuration = (5 + Math.random() * 5) + "s";
-      document.body.appendChild(star);
+<!-- 星星和雪花 -->
+<script>
+  // 星星
+  for (let i = 0; i < 100; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(star);
+  }
+
+  // 雪花
+  function createSnowflake() {
+    const snowflake = document.createElement("div");
+    snowflake.className = "snowflake";
+    snowflake.textContent = "❄️";
+    snowflake.style.left = Math.random() * 100 + "vw";
+    snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
+    snowflake.style.opacity = Math.random();
+    snowflake.style.fontSize = 12 + Math.random() * 20 + "px";
+    document.body.appendChild(snowflake);
+    setTimeout(() => snowflake.remove(), 10000);
+  }
+  setInterval(createSnowflake, 300);
+
+  // 点击页面播放音乐
+  let musicPlayed = false;
+  document.body.addEventListener("click", function () {
+    const bgm = document.getElementById("bgm");
+    if (!musicPlayed && bgm.paused) {
+      bgm.play();
+      musicPlayed = true;
     }
+  });
+</script>
 
-    // 雪花效果
-    function createSnowflake() {
-      const snowflake = document.createElement("div");
-      snowflake.className = "snowflake";
-      snowflake.textContent = "❄️";
-      snowflake.style.left = Math.random() * 100 + "vw";
-      snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
-      snowflake.style.opacity = Math.random();
-      snowflake.style.fontSize = 12 + Math.random() * 20 + "px";
-      document.body.appendChild(snowflake);
-      setTimeout(() => snowflake.remove(), 10000);
-    }
-    setInterval(createSnowflake, 300);
-
-    // HAPPY BIRTHDAY 点击出现动画
-    let bannerShown = false;
-
-    document.body.addEventListener("click", function () {
-      const bgm = document.getElementById("bgm");
-      if (bgm.paused) bgm.play();
-
-      if (bannerShown) return;
-      bannerShown = true;
-
-      const left = document.createElement("div");
-      left.className = "birthday-banner left-banner";
-      left.innerHTML = "🎉<br>H<br>A<br>P<br>P<br>Y<br><br>B<br>I<br>R<br>T<br>H<br>D<br>A<br>Y<br>🎉";
-
-      const right = document.createElement("div");
-      right.className = "birthday-banner right-banner";
-      right.innerHTML = "🎉<br>H<br>A<br>P<br>P<br>Y<br><br>B<br>I<br>R<br>T<br>H<br>D<br>A<br>Y<br>🎉";
-
-      document.body.appendChild(left);
-      document.body.appendChild(right);
-    });
-  </script>
 </body>
 </html>
+
 
 
