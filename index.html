@@ -93,7 +93,7 @@
 </audio>
 
 <!-- 手动播放按钮 -->
-<button onclick="document.getElementById('bgm').play()">🎵 点我播放背景音乐</button>
+<button onclick="document.getElementById('bgm').play()"hidden>🎵 点我播放背景音乐</button>
 
 
   <div class="container">
@@ -125,5 +125,13 @@
   <img src="photo3.jpg" style="--delay: 1s;">
   <img src="photo4.jpg" style="--delay: 1.5s;">
 </div>
+
+  <script>
+document.addEventListener('click', function() {
+  var bgm = document.getElementById('bgm');
+  bgm.play();
+}, { once: true });
+</script>
+
 </body>
 </html>
