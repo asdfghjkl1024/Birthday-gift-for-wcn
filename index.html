@@ -38,8 +38,7 @@
       font-size: 14px;
       color: #aaa;
     }
-
-    /* 星星效果 */
+    /* 星星背景 */
     .star {
       position: absolute;
       width: 2px;
@@ -52,8 +51,19 @@
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(100vh); opacity: 0; }
     }
-
-    /* 照片 */
+    /* 雪花 */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      font-size: 20px;
+      animation: fall linear infinite;
+      z-index: 9999;
+    }
+    @keyframes fall {
+      to { transform: translateY(100vh); }
+    }
+    /* 图片淡入 */
     .image-gallery {
       display: flex;
       justify-content: center;
@@ -70,17 +80,10 @@
       animation-delay: var(--delay);
     }
     @keyframes fadeInScale {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
     }
-
-    /* 左右竖排HappyBirthday */
+    /* 竖排 Happy Birthday */
     .birthday-banner {
       position: fixed;
       top: 50%;
@@ -115,47 +118,27 @@
     .banner-char:nth-child(13) { animation-delay: 1.3s; }
     .banner-char:nth-child(14) { animation-delay: 1.4s; }
     @keyframes fadeInChar {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    /* 雪花 */
-    .snowflake {
-      position: fixed;
-      top: -10px;
-      color: #fff;
-      font-size: 20px;
-      animation: fall linear infinite;
-      z-index: 9999;
-    }
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-      }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 
 <body>
 
+<!-- 音乐播放 -->
 <audio id="bgm" loop>
   <source src="your_music.mp3" type="audio/mpeg">
   您的浏览器不支持音频播放。
 </audio>
 
-<!-- 隐藏按钮，不需要手动播放 -->
-<button onclick="document.getElementById('bgm').play()" hidden>🎵 点我播放背景音乐</button>
-
+<!-- 内容 -->
 <div class="container">
-  <h1>0429 生日快乐！楚宁喵！！🎂</h1>
+  <h1>0429生日快乐! 楚宁喵!! 🎂</h1>
   <p>今天是你来到世界的第20年。</p>
   <p>希望你每一天都没有烦恼，</p>
   <p>钱从四面八方来！！好运连连~</p>
   <p>我会一直更新这个界面的~</p>
   <p>祝你在新的一岁和元彬喵多多见面！！爱你！✨</p>
-
   <div class="footer">
     From 思含喵~ 🪄
   </div>
@@ -172,7 +155,7 @@ for (let i = 0; i < 100; i++) {
 }
 </script>
 
-<!-- 照片 -->
+<!-- 照片展示 -->
 <div class="image-gallery">
   <img src="photo1.jpg" style="--delay: 0s;">
   <img src="photo2.jpg" style="--delay: 0.5s;">
@@ -180,7 +163,7 @@ for (let i = 0; i < 100; i++) {
   <img src="photo4.jpg" style="--delay: 1.5s;">
 </div>
 
-<!-- Happy Birthday竖排 + 雪花 + 音乐自动播放 -->
+<!-- Happy Birthday动画 + 雪花 -->
 <script>
 let bannerShown = false;
 
@@ -191,7 +174,7 @@ document.body.addEventListener("click", function () {
   if (bannerShown) return;
   bannerShown = true;
 
-  const text = "🎉HAPPYBIRTHDAY🎉";
+  const text = ["🎉", "H", "A", "P", "P", "Y", "", "B", "I", "R", "T", "H", "D", "A", "Y", "🎉"];
 
   const left = document.createElement("div");
   left.className = "birthday-banner left-banner";
@@ -215,7 +198,7 @@ document.body.addEventListener("click", function () {
   document.body.appendChild(right);
 });
 
-// 雪花
+// 雪花生成
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.className = "snowflake";
@@ -232,3 +215,4 @@ setInterval(createSnowflake, 300);
 
 </body>
 </html>
+
